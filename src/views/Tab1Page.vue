@@ -13,6 +13,28 @@
       </ion-header>
     
       <ExploreContainer name="Tab 1 page" />
+
+      <div class="hello" v-if="connect == true">
+        <img src="" alt="">
+        <!-- <h1>True</h1> -->
+        <h2>Bienvenue chez nous !</h2>
+        <input type="text">
+        <input type="password">
+        <a >Connexion</a>
+        <p>Pas de compte ? <a @click="connect = !connect">Inscription</a></p>
+      </div>
+
+
+      <div class="hello" v-else>
+        <img src="" alt="">
+        <!-- <h1>False</h1> -->
+        <h2>Bienvenue !</h2>
+        <input type="text">
+        <input type="password">
+        <a href="">S'inscrire</a>
+        <p>Déjà un compte ? <a @click="connect = !connect">Connexion</a></p>
+      </div>
+
     </ion-content>
   </ion-page>
 </template>
@@ -24,6 +46,12 @@ import ExploreContainer from '@/components/ExploreContainer.vue';
 
 export default  defineComponent({
   name: 'Tab1Page',
+  data() {
+    return {
+      message: "test",
+      connect: true,
+    };
+  },
   components: { ExploreContainer, IonHeader, IonToolbar, IonTitle, IonContent, IonPage }
 });
 </script>
