@@ -1,6 +1,8 @@
 /* Ionic Variables and Theming. For more info, please see:
 http://ionicframework.com/docs/theming/ */
 
+@import url('https://fonts.googleapis.com/css2?family=Archivo&display=swap');
+
 /** Ionic CSS Variables **/
 :root {
   /** primary **/
@@ -151,6 +153,23 @@ http://ionicframework.com/docs/theming/ */
    * iOS Dark Theme
    * -------------------------------------------
    */
+
+  .title{
+    font-family: 'Poppins' sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  .background{
+    position: absolute;
+    z-index: -1;
+    width: 100vw;
+    height: 110vh;
+    background-image: url("../assets/background.svg") !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+  }
 
   .ios body {
     --ion-background-color: #000000;
