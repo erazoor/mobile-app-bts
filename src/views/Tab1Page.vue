@@ -35,15 +35,15 @@ export default  defineComponent({
   data() {
     return {
       login: "",
-      mdp: "",
+      password: "",
     }
   },
-  components: {  IonContent, IonPage,IonItem,IonInput,IonLabel,IonButton},
+  components: {  IonContent, IonPage, IonItem, IonInput, IonLabel, IonButton },
   methods: {
     log() {
         axios
           .get(
-            'http://localhost/api/produits.php?login='+this.login+'&password='+this.mdp
+            'http://localhost/mobile-app/app/api/users.php?login='+this.login+'&password='+this.password
           )
           .then((response) => {
             if (response.status == 200) {
