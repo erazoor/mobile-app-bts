@@ -4,9 +4,9 @@
 	$request_method = $_SERVER["REQUEST_METHOD"];
 	getCommandes();
 
-	function getCommandes(){
+	function getCommandes($id = 1){
 		global $conn;
-		$req = $conn->prepare("SELECT label FROM commande C INNER JOIN user U WHERE C.user_id = U.id");
+		$req = $conn->prepare("SELECT label, username FROM commande C INNER JOIN user U WHERE U.user_id = ".$id." AND C.fk_user_id = U.user_id");
 		$req->execute();
 		$response = $req->fetchAll(PDO::FETCH_ASSOC);
 		
@@ -15,8 +15,7 @@
         
 		foreach($response as $aCommand)
 		{
-			$array = array('label' => array(implode(" ", $aCommand)));
-            
+			$array[] = $aCommand;
 		}
 
         $req->closeCursor();

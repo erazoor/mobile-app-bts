@@ -7,15 +7,18 @@
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">Tab 2</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <section>
-        {{ info.label }}
+      <section class="card-section">
+        <div class="card" v-for="info in infos" :key="info">
+          <div class="card-header">
+            <h1 v-if="infos"> {{infos[i].label }} </h1>
+            <h1 v-else> Loading </h1>
+          </div>
+          <div class="card-body">
+            <h2>Body</h2>
+          </div>
+          <div style="display: none;">{{ i++ }}</div>
+        </div>
       </section>
-      <ExploreContainer name="Tab 2 page" />
     </ion-content>
   </ion-page>
 </template>
@@ -29,19 +32,64 @@ export default defineComponent({
   name: 'Tab2Page',
   data() {
     return {
-      login: "admin",
-      password: "admin",
-      info: "False",
+      id: 0,
+      infos: [],
+      i: 0,
     }
   },
-  mounted() {
-    axios
+  async mounted() {
+    await axios
       .get('http://localhost/mobile-app/app/api/commandes')
       .then((response) => {
-        this.info = response.data ? response.data : 'No data Available';
+        this.infos = response.data ? response.data : 'No data Available';
       })
-      .catch(error => console.log(error))
+      .catch(error => console.log(error));
+  },
+  methods : {
+
   },
   components: {  IonHeader, IonToolbar, IonTitle, IonContent, IonPage/*,IonItem,IonInput,IonLabel,IonButton*/},
 });
 </script>
+
+<style>
+  .card-section{
+    margin-top: 8vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .card{
+    padding: 6vh 20vw;
+    margin-bottom: 4vh;
+    background: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+  }
+
+  .card-header{
+    margin-top: -3vh;
+    margin-bottom: 6vh;
+    background: blue;
+    text-align: center;
+  }
+
+  .card-body{
+
+  }
+
+  .background{
+    position: absolute;
+    z-index: 10;
+    width: 100vw;
+    height: 110vh;
+    background-image: url("../assets/background.svg") !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+  }
+</style>

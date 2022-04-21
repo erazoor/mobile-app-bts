@@ -13,7 +13,7 @@
       
       <ion-item id="input_login" style="margin-bottom: 2vh; border-radius: 10px; width: 30vw;">
         <ion-label position="floating">Password</ion-label>
-        <ion-input v-model="mdp"/>
+        <ion-input v-model="password"/>
       </ion-item>
 
       <div class="button"><ion-button type="submit" >Connexion</ion-button></div>
@@ -36,6 +36,7 @@ export default  defineComponent({
     return {
       login: "",
       password: "",
+      id: 1,
     }
   },
   components: {  IonContent, IonPage, IonItem, IonInput, IonLabel, IonButton },
@@ -47,7 +48,7 @@ export default  defineComponent({
           )
           .then((response) => {
             if (response.status == 200) {
-              window.location.href = "/tabs/tab2";
+              window.location.href = "/tabs/tab2?id="+this.id;
               console.log(response);
             }
           })
