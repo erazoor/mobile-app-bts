@@ -2,17 +2,19 @@
 	// Connect to database
 	include("db_connect.php");
 	$request_method = $_SERVER["REQUEST_METHOD"];
+	setComment();
 
-	function setComment($id = 1, $text = ""){
+	function setComment(){
 		global $conn;
-		$req = $conn->prepare("INSERT INTO commentaire (comment_text, fk_user_id) VALUES (:comment, :id)");
-        $sql = $conn->prepare($req);
-        $sql->bindValue(":comment", $text, PDO::PARAM_STR);
-        $sql->bindValue(":id", $id, PDO::PARAM_INT);
-        $sql->execute();
+		$response = array();
+		$req = $conn->prepare("INSERT INTO commentaire (comment_text, fk_user_id) VALUES (:commentary, :id)");
+        $req->bindValue("commentary", $_GET['commentary'], PDO::PARAM_STR);
+        $req->bindValue("id", $_GET['id'], PDO::PARAM_INT);
+        $req->execute();
 		
 		header('Access-Control-Allow-Origin: *');
 		header('Content-Type: application/json');
-        
-        $req->closeCursor();
+		http_response_code(200);
+
+        echo json_encode($response, JSON_PRETTY_PRINT);
 	}

@@ -14,7 +14,7 @@
             <h1 v-else> Loading </h1>
           </div>
           <div class="card-body">
-            <h2>Body</h2>
+            <h2>Chaise | x4 - Table | x1 - Lampe | x2</h2>
           </div>
           <div style="display: none;">{{ i++ }}</div>
         </div>
@@ -64,7 +64,7 @@ export default defineComponent({
   .card{
     padding: 6vh 20vw;
     margin-bottom: 4vh;
-    background: red;
+    background: black;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -75,7 +75,6 @@ export default defineComponent({
   .card-header{
     margin-top: -3vh;
     margin-bottom: 6vh;
-    background: blue;
     text-align: center;
   }
 

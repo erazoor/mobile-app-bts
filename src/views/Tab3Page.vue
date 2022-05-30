@@ -7,13 +7,16 @@
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
-      <form @submit="onSubmit()" class="add-form">
-        <div class="form-control">
-          <label>Commentaire</label>
-          <input type="text" name="commentaire" placeholder="Mettre un commentaire" />
-        </div>
-        <input type="submit" value="Save Information" class="btn btn-block" />
+
+      <form @submit.prevent="comment()">
+      <ion-item id="input_commentary" style="margin-bottom: 2vh; border-radius: 10px; width: 30vw;">
+        <ion-label position="floating">Commentaire</ion-label>
+        <ion-input v-model="commentary"/>
+      </ion-item>
+
+      <div class="button"><ion-button type="submit" >Envoyer</ion-button></div>
       </form>
+      
     </ion-content>
   </ion-page>
 </template>
@@ -27,27 +30,29 @@ export default defineComponent({
   name: 'Tab3Page',
   data() {
     return {
-      commentaire: ""
+      commentary: "",
+      id: 1,
     }
   },
-  async onSubmit() {
-    let commentary = { title: "Commentaire" };
-    await axios
-      .post(
-        'http://localhost/mobile-app/app/api/commentaire', commentary
-      )
-      .then((response) => {
-        this.commentaire = response.data;
-      })  
-      .catch((error) => {
-        console.error(error);
-      })
-  },
+  methods: {
+    comment() {
+        axios
+          .get(
+            'http://localhost/mobile-app/app/api/commentaire.php?commentary='+this.commentary+'&id='+this.id
+          )
+          .then((response) => {
+            if (response.status == 200) {
+              window.location.href = "/tabs/tab2?id="+this.id;
+              console.log(response);
+            }
+          })
+      },
+    },
   components: { IonHeader, IonToolbar, IonTitle, IonContent, IonPage }
 });
 </script>
 
-<style>
+<style scoped>
   .background{
     position: absolute;
     z-index: -1;
