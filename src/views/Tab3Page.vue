@@ -11,9 +11,8 @@
       <form @submit.prevent="comment()">
       <ion-item id="input_commentary" style="margin-bottom: 2vh; border-radius: 10px; width: 30vw;">
         <ion-label position="floating">Commentaire</ion-label>
-        <ion-input v-model="commentary"/>
+        <input type="text" v-model="commentary"/>
       </ion-item>
-
       <div class="button"><ion-button type="submit" >Envoyer</ion-button></div>
       </form>
       
@@ -30,7 +29,7 @@ export default defineComponent({
   name: 'Tab3Page',
   data() {
     return {
-      commentary: "",
+      commentary: '',
       id: 1,
     }
   },
@@ -42,7 +41,7 @@ export default defineComponent({
           )
           .then((response) => {
             if (response.status == 200) {
-              window.location.href = "/tabs/tab2?id="+this.id;
+              window.location.href = "/tabs/tab2?id="+this.id+'&commentary='+this.commentary;
               console.log(response);
             }
           })
